@@ -23,11 +23,12 @@ public class AspectV4Pointcuts {
             log.info("[트랜잭션 시작] {}", joinPoint.getSignature());
             Object result = joinPoint.proceed();
             log.info("[트랜잭션 커밋] {}", joinPoint.getSignature());
+            return result;
         }catch (Exception e){
             log.info("[트랜잭션 롤백] {}", joinPoint.getSignature());
+            throw e;
         }finally {
             log.info("[리소스 릴리즈] {}", joinPoint.getSignature());
         }
-        return joinPoint.proceed();
     }
 }
